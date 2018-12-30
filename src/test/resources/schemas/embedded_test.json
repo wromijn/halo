@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "embedded_object": {
+          "$ref": "#/definitions/embedded"
+        },
+        "embedded_stream": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/embedded"
+            }
+          ]
+        },
+        "embedded_list": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/embedded"
+            }
+          ]
+        }
+      },
+      "required": [
+        "embedded_object",
+        "embedded_stream",
+        "embedded_list"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "_embedded"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "embedded": {
+      "type": "object",
+      "properties": {
+        "inline_property": {
+          "type": "string",
+          "const": "inline_property"
+        },
+        "_links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "const": "http://www.example.com"
+                }
+              },
+              "required": [
+                "href"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "self"
+          ],
+          "additionalProperties": false
+        },
+        "_embedded": {
+          "type": "object",
+          "properties": {
+            "embedded": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "const": "value"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "embedded"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "inline_property"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

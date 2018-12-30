@@ -9,7 +9,10 @@ import org.json.JSONTokener;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -52,11 +55,17 @@ public class HalRepresentationTest {
     @Test
     public void testInline() throws Exception {
         HalRepresentation representation = new HalRepresentation()
-                .addInline("inline", new HalRepresentation()
-                        .addString("inline_property", "inline_property")
-                        .addLink("self", "http://www.example.com")
-                        .addEmbedded("embedded", new HalRepresentation().addString("i_disappear", "i_disappear")));
+                .addInline("inline_object", createObjectRepresentation());
         matchAgainstSchema(objectMapper.writeValueAsString(representation), "/schemas/inline_test.json");
+    }
+
+    @Test
+    public void testEmbedded() throws Exception {
+        HalRepresentation representation = new HalRepresentation()
+                .addEmbedded("embedded_object", createObjectRepresentation())
+                .addEmbedded("embedded_stream", Stream.of(createObjectRepresentation()))
+                .addEmbedded("embedded_list", Collections.singleton(createObjectRepresentation()));
+        matchAgainstSchema(objectMapper.writeValueAsString(representation), "/schemas/embedded_test.json");
     }
 
     private void matchAgainstSchema(String response, String schemaPath) throws Exception {
@@ -65,11 +74,22 @@ public class HalRepresentationTest {
             Schema schema = SchemaLoader.load(rawSchema);
             schema.validate(new JSONObject(response)); // throws a ValidationException if this object is invalid
         } catch (ValidationException e) {
-            System.out.println(e.getMessage());
-            e.getCausingExceptions().stream()
-                    .map(ValidationException::getMessage)
-                    .forEach(System.out::println);
+            getValidationErrors(e).forEach(System.out::println);
             throw (e);
         }
+    }
+
+    private List<String> getValidationErrors(ValidationException e) {
+        List<String> result = new ArrayList<>();
+        result.add(e.getMessage());
+        result.addAll(e.getCausingExceptions().stream().map(this::getValidationErrors).flatMap(List::stream).collect(Collectors.toList()));
+        return result;
+    }
+
+    private HalRepresentation createObjectRepresentation() {
+        return new HalRepresentation()
+                .addString("inline_property", "inline_property")
+                .addLink("self", "http://www.example.com")
+                .addEmbedded("embedded", new HalRepresentation().addString("key", "value"));
     }
 }
