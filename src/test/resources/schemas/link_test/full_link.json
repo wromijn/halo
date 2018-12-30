@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "const": "/link"
+    },
+    "templated": {
+      "type": "boolean",
+      "const": false
+    },
+    "type": {
+      "type": "string",
+      "const": "type_value"
+    },
+    "deprecation": {
+      "type": "string",
+      "const": "http://www.example.com/deprecation"
+    },
+    "name": {
+      "type": "string",
+      "const": "name_value"
+    },
+    "profile": {
+      "type": "string",
+      "const": "http://www.example.com/profile"
+    },
+    "title": {
+      "type": "string",
+      "const": "title_value"
+    },
+    "hreflang": {
+      "type": "string",
+      "const": "US_en"
+    }
+  },
+  "required": [
+    "href",
+    "templated",
+    "type",
+    "deprecation",
+    "name",
+    "profile",
+    "title",
+    "hreflang"
+  ],
+  "additionalProperties": false
+}

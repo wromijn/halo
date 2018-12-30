@@ -29,6 +29,10 @@
       "type": "integer",
       "const": 1
     },
+    "integer_double": {
+      "type": "integer",
+      "const": 2
+    },
     "integer_null": {
       "type": "null"
     },
@@ -63,6 +67,7 @@
     "integer_value",
     "integer_long",
     "integer_float",
+    "integer_double",
     "integer_null",
     "number_float",
     "number_double",
