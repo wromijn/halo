@@ -1,59 +1,75 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
     "boolean_true": {
       "type": "boolean",
-      "enum": [
-        true
-      ]
+      "const": true
     },
     "boolean_false": {
       "type": "boolean",
-      "enum": [
-        false
-      ]
+      "const": false
     },
-    "byte_value": {
+    "boolean_null": {
+      "type": "null"
+    },
+    "integer_byte": {
       "type": "integer",
-      "enum": [
-        127
-      ]
+      "const": 127
     },
     "integer_value": {
       "type": "integer",
-      "enum": [123]
+      "const": 123
     },
-    "long_value": {
+    "integer_long": {
       "type": "integer",
-      "enum": [123]
+      "const": 123
     },
-    "float_value": {
-      "type": "number",
-      "enum": [123.456]
+    "integer_float": {
+      "type": "integer",
+      "const": 1
     },
-    "double_value": {
+    "integer_null": {
+      "type": "null"
+    },
+    "number_float": {
       "type": "number",
-      "enum": [123.456]
+      "const": 123.456
+    },
+    "number_double": {
+      "type": "number",
+      "const": 123.456
+    },
+    "number_integer": {
+      "type": "number",
+      "const": 1.0
+    },
+    "number_null": {
+      "type": "null"
     },
     "string_value": {
       "type": "string",
-      "enum": ["hello"]
+      "const": "hello"
     },
-    "char_value": {
-      "type": "string",
-      "enum": ["h"]
+    "string_null": {
+      "type": "null"
     }
   },
   "required": [
     "boolean_true",
     "boolean_false",
-    "byte_value",
+    "boolean_null",
+    "integer_byte",
     "integer_value",
-    "long_value",
-    "float_value",
-    "double_value",
+    "integer_long",
+    "integer_float",
+    "integer_null",
+    "number_float",
+    "number_double",
+    "number_integer",
+    "number_null",
     "string_value",
-    "char_value"
+    "string_null"
   ],
-  "additionaProperties": false
+  "additionalProperties": false
 }

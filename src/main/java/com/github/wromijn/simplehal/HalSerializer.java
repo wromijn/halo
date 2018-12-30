@@ -13,8 +13,8 @@ class HalSerializer extends JsonSerializer<HalRepresentation> {
     public void serialize(HalRepresentation halRepresentation, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode rootNode = objectMapper.valueToTree(halRepresentation.properties);
-        if (! halRepresentation.links.isEmpty()) {
-            rootNode.set("_links", objectMapper.valueToTree(halRepresentation.links));
+        if (! halRepresentation._links.isEmpty()) {
+            rootNode.set("_links", objectMapper.valueToTree(halRepresentation._links));
         }
         if (! halRepresentation.embedded.isEmpty()) {
             rootNode.set("_embedded", objectMapper.valueToTree(halRepresentation.embedded));

@@ -13,12 +13,27 @@ public class HalRepresentation {
 
     Map<String, Object> properties = new TreeMap<>();
 
-    Map<String, Object> links = new TreeMap<>();
+    Map<String, Object> _links = new TreeMap<>();
 
     Map<String, Object> embedded = new TreeMap<>();
 
     public HalRepresentation addLink(String rel, String uri) {
-        links.put(rel, new Link(uri));
+        _links.put(rel, new Link(uri));
+        return this;
+    }
+
+    public HalRepresentation addLink(String rel, Link link) {
+        _links.put(rel, link);
+        return this;
+    }
+
+    public HalRepresentation addLinks(String rel, Iterable<? extends Link> links) {
+        addLinks(rel, StreamSupport.stream(links.spliterator(), false));
+        return this;
+    }
+
+    public HalRepresentation addLinks(String rel, Stream<? extends Link> links) {
+        _links.put(rel, links.collect(Collectors.toList()));
         return this;
     }
 
@@ -27,37 +42,27 @@ public class HalRepresentation {
         return this;
     }
 
-    public HalRepresentation addInteger(String name, Byte value) {
-        properties.put(name, value);
+    public HalRepresentation addInteger(String name, Number value) {
+        if (value instanceof Double || value instanceof Float) {
+            properties.put(name, value.longValue());
+        } else {
+            properties.put(name, value);
+        }
         return this;
     }
 
-    public HalRepresentation addInteger(String name, Integer value) {
-        properties.put(name, value);
-        return this;
-    }
-
-    public HalRepresentation addInteger(String name, Long value) {
-        properties.put(name, value);
-        return this;
-    }
-
-    public HalRepresentation addNumber(String name, Double value) {
-        properties.put(name, value);
-        return this;
-    }
-
-    public HalRepresentation addNumber(String name, Float value) {
-        properties.put(name, value);
+    public HalRepresentation addNumber(String name, Number value) {
+        if (value == null) {
+            properties.put(name, null);
+        } else if (value instanceof Double || value instanceof Float) {
+            properties.put(name, value);
+        } else {
+            properties.put(name, value.floatValue());
+        }
         return this;
     }
 
     public HalRepresentation addString(String name, String value) {
-        properties.put(name, value);
-        return this;
-    }
-
-    public HalRepresentation addString(String name, Character value) {
         properties.put(name, value);
         return this;
     }

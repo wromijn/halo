@@ -55,6 +55,19 @@
             <version>2.2.10</version>
             <scope>test</scope>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.github.everit-org.json-schema</groupId>-->
+            <!--<artifactId>org.everit.json.schema</artifactId>-->
+            <!--<version>1.10.0</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.github.erosb</groupId>
+            <artifactId>everit-json-schema-jdk6</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

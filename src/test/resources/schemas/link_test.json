@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "simple_link": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "const": "http://www.example.com/single"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "additionalProperties": false
+        },
+        "link_object": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "const": "http://www.example.com/object"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "additionalProperties": false
+        },
+        "link_list": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "const": "http://www.example.com/list"
+                }
+              },
+              "required": [
+                "href"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "link_stream": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "const": "http://www.example.com/stream"
+                }
+              },
+              "required": [
+                "href"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "simple_link",
+        "link_object",
+        "link_list",
+        "link_stream"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "_links"
+  ],
+  "additionalProperties": false
+}
