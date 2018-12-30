@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "boolean_true": {
+      "type": "boolean",
+      "enum": [
+        true
+      ]
+    },
+    "boolean_false": {
+      "type": "boolean",
+      "enum": [
+        false
+      ]
+    },
+    "byte_value": {
+      "type": "integer",
+      "enum": [
+        127
+      ]
+    },
+    "integer_value": {
+      "type": "integer",
+      "enum": [123]
+    },
+    "long_value": {
+      "type": "integer",
+      "enum": [123]
+    },
+    "float_value": {
+      "type": "number",
+      "enum": [123.456]
+    },
+    "double_value": {
+      "type": "number",
+      "enum": [123.456]
+    },
+    "string_value": {
+      "type": "string",
+      "enum": ["hello"]
+    },
+    "char_value": {
+      "type": "string",
+      "enum": ["h"]
+    }
+  },
+  "required": [
+    "boolean_true",
+    "boolean_false",
+    "byte_value",
+    "integer_value",
+    "long_value",
+    "float_value",
+    "double_value",
+    "string_value",
+    "char_value"
+  ],
+  "additionaProperties": false
+}

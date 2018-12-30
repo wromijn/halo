@@ -27,7 +27,17 @@ public class HalRepresentation {
         return this;
     }
 
+    public HalRepresentation addInteger(String name, Byte value) {
+        properties.put(name, value);
+        return this;
+    }
+
     public HalRepresentation addInteger(String name, Integer value) {
+        properties.put(name, value);
+        return this;
+    }
+
+    public HalRepresentation addInteger(String name, Long value) {
         properties.put(name, value);
         return this;
     }
@@ -43,6 +53,11 @@ public class HalRepresentation {
     }
 
     public HalRepresentation addString(String name, String value) {
+        properties.put(name, value);
+        return this;
+    }
+
+    public HalRepresentation addString(String name, Character value) {
         properties.put(name, value);
         return this;
     }
