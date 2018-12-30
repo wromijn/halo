@@ -49,6 +49,16 @@ public class HalRepresentationTest {
         matchAgainstSchema(objectMapper.writeValueAsString(representation), "/schemas/link_test.json");
     }
 
+    @Test
+    public void testInline() throws Exception {
+        HalRepresentation representation = new HalRepresentation()
+                .addInline("inline", new HalRepresentation()
+                        .addString("inline_property", "inline_property")
+                        .addLink("self", "http://www.example.com")
+                        .addEmbedded("embedded", new HalRepresentation().addString("i_disappear", "i_disappear")));
+        matchAgainstSchema(objectMapper.writeValueAsString(representation), "/schemas/inline_test.json");
+    }
+
     private void matchAgainstSchema(String response, String schemaPath) throws Exception {
         try (InputStream inputStream = getClass().getResourceAsStream(schemaPath)) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
@@ -59,7 +69,7 @@ public class HalRepresentationTest {
             e.getCausingExceptions().stream()
                     .map(ValidationException::getMessage)
                     .forEach(System.out::println);
-            throw(e);
+            throw (e);
         }
     }
 }
