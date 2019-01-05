@@ -32,7 +32,7 @@
     },
     "hreflang": {
       "type": "string",
-      "const": "US_en"
+      "const": "en"
     }
   },
   "required": [

@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties":{
+    "boolean_list": {
+      "type": "array",
+      "items": {
+        "type": "boolean",
+        "const": true
+      }
+    },
+    "boolean_stream": {
+      "type": "array",
+      "items": {
+        "type": "boolean",
+        "const": false
+      }
+    },
+    "integer_list": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "const": 1
+      }
+    },
+    "integer_stream": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "const": 2
+      }
+    },
+    "number_list": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "const": 3.0
+      }
+    },
+    "number_stream": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "const": 4.0
+      }
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "const": "one"
+      }
+    },
+    "string_stream": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "const": "two"
+      }
+    },
+    "inline_list": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "inline_stream": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "boolean_list",
+    "boolean_stream",
+    "integer_list",
+    "integer_stream",
+    "number_list",
+    "number_stream",
+    "string_list",
+    "string_stream",
+    "inline_list",
+    "inline_stream"
+  ],
+  "additionalProperties": false
+}

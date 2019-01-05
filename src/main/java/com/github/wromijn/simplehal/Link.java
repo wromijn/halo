@@ -6,8 +6,7 @@ import lombok.experimental.Accessors;
 
 import java.net.URL;
 
-@Getter
-@Setter
+@Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Accessors(chain = true)
 @NoArgsConstructor

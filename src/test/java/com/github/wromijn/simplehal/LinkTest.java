@@ -45,7 +45,7 @@ public class LinkTest {
                 .setHref("/link")
                 .setTemplated(false)
                 .setDeprecation(new URL("http://www.example.com/deprecation"))
-                .setHreflang("US_en")
+                .setHreflang("en")
                 .setName("name_value")
                 .setProfile(new URL("http://www.example.com/profile"))
                 .setTitle("title_value")

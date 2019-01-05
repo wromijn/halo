@@ -16,8 +16,8 @@ class HalSerializer extends JsonSerializer<HalRepresentation> {
         if (! halRepresentation._links.isEmpty()) {
             rootNode.set("_links", objectMapper.valueToTree(halRepresentation._links));
         }
-        if (! halRepresentation.embedded.isEmpty()) {
-            rootNode.set("_embedded", objectMapper.valueToTree(halRepresentation.embedded));
+        if (! halRepresentation._embedded.isEmpty()) {
+            rootNode.set("_embedded", objectMapper.valueToTree(halRepresentation._embedded));
         }
         jsonGenerator.writeObject(rootNode);
     }

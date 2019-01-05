@@ -91,7 +91,9 @@
         }
       },
       "required": [
-        "inline_property"
+        "inline_property",
+        "_links",
+        "_embedded"
       ],
       "additionalProperties": false
     }
