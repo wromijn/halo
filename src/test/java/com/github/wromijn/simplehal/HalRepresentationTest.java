@@ -40,17 +40,11 @@ public class HalRepresentationTest {
     @Test
     public void testLists() {
         HalRepresentation representation = new HalRepresentation()
-                .addBooleanList("boolean_list", Collections.singletonList(true))
-                .addBooleanList("boolean_stream", Stream.of(false))
-                .addIntegerList("integer_list", Collections.singletonList(1))
-                .addIntegerList("integer_stream", Stream.of(2))
-                .addNumberList("number_list", Collections.singletonList(3))
-                .addNumberList("number_stream", Stream.of(4))
-                .addStringList("string_list", Collections.singletonList("one"))
-                .addStringList("string_stream", Stream.of("two"))
-                .addInlineList("inline_list", Collections.singletonList(createObjectRepresentation()))
-                .addInlineList("inline_stream", Stream.of(createObjectRepresentation()));
-        schemaUtils.assertSerializationMatchesSchema(representation, "/schemas/hal_representation_test/list_test.json");
+                .addOther("boolean_list", Collections.singletonList(true))
+                .addOther("integer_list", Collections.singletonList(1))
+                .addOther("number_list", Collections.singletonList(3F))
+                .addOther("string_list", Collections.singletonList("one"));
+        schemaUtils.assertSerializationMatchesSchema(representation, "/schemas/hal_representation_test/array_test.json");
     }
 
     @Test
@@ -66,7 +60,9 @@ public class HalRepresentationTest {
     @Test
     public void testInline() {
         HalRepresentation representation = new HalRepresentation()
-                .addInline("inline_object", createObjectRepresentation());
+                .addInline("inline_object", createObjectRepresentation())
+                .addInlineList("inline_list", Collections.singletonList(createObjectRepresentation()))
+                .addInlineList("inline_stream", Stream.of(createObjectRepresentation()));
         schemaUtils.assertSerializationMatchesSchema(representation, "/schemas/hal_representation_test/inline_test.json");
     }
 
@@ -80,21 +76,21 @@ public class HalRepresentationTest {
     }
 
     @Test
-    public void testFromJsonNode() {
+    public void testFromObject() {
         ObjectNode node = new ObjectMapper().createObjectNode();
         node.put("name", "value");
         node.put("number", 1);
         node.put("boolean", false);
-        HalRepresentation representation = HalRepresentation.ofJsonNode(node);
+        HalRepresentation representation = HalRepresentation.fromObject(node);
         assertThat(representation.properties.get("name"), is("value"));
         assertThat(representation.properties.get("number"), is(1));
         assertThat(representation.properties.get("boolean"), is(false));
     }
 
     @Test
-    public void testFromJsonNodeWithError() {
+    public void testFromObjectWithError() {
         JsonNode node = new ObjectMapper().createArrayNode();
-        assertThrows(IllegalArgumentException.class, () -> HalRepresentation.ofJsonNode(node));
+        assertThrows(IllegalArgumentException.class, () -> HalRepresentation.fromObject(node));
     }
 
     @Test

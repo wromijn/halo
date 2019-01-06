@@ -19,14 +19,19 @@ public final class HalRepresentation {
 
     Map<String, Object> _embedded = new TreeMap<>();
 
-    public static HalRepresentation ofJsonNode(JsonNode jsonNode) {
+    public static HalRepresentation fromObject(Object object, ObjectMapper objectMapper) {
         HalRepresentation representation = new HalRepresentation();
         try {
-            representation.properties.putAll(new ObjectMapper().treeToValue(jsonNode, Map.class));
+            JsonNode jsonNode = objectMapper.valueToTree(object);
+            representation.properties.putAll(objectMapper.treeToValue(jsonNode, Map.class));
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
         return representation;
+    }
+
+    public static HalRepresentation fromObject(Object o) {
+        return fromObject(o, new ObjectMapper());
     }
 
     // --------------------------------------------------------------
@@ -36,28 +41,8 @@ public final class HalRepresentation {
         return this;
     }
 
-    public HalRepresentation addBooleanList(String name, Iterable<Boolean> booleans) {
-        addBooleanList(name, StreamSupport.stream(booleans.spliterator(), false));
-        return this;
-    }
-
-    public HalRepresentation addBooleanList(String name, Stream<Boolean> booleans) {
-        properties.put(name, booleans.toArray());
-        return this;
-    }
-
     public HalRepresentation addInteger(String name, Number number) {
         properties.put(name, normalizeInteger(number));
-        return this;
-    }
-
-    public HalRepresentation addIntegerList(String name, Iterable<Number> numbers) {
-        addIntegerList(name, StreamSupport.stream(numbers.spliterator(), false));
-        return this;
-    }
-
-    public HalRepresentation addIntegerList(String name, Stream<Number> numbers) {
-        properties.put(name, numbers.toArray());
         return this;
     }
 
@@ -66,28 +51,13 @@ public final class HalRepresentation {
         return this;
     }
 
-    public HalRepresentation addNumberList(String name, Iterable<Number> numbers) {
-        addNumberList(name, StreamSupport.stream(numbers.spliterator(), false));
-        return this;
-    }
-
-    public HalRepresentation addNumberList(String name, Stream<Number> numbers) {
-        properties.put(name, numbers.map(this::normalizeNumber).toArray());
-        return this;
-    }
-
     public HalRepresentation addString(String name, String value) {
         properties.put(name, value);
         return this;
     }
 
-    public HalRepresentation addStringList(String name, Iterable<String> strings) {
-        properties.put(name, strings);
-        return this;
-    }
-
-    public HalRepresentation addStringList(String name, Stream<String> strings) {
-        properties.put(name, strings.toArray());
+    public HalRepresentation addOther(String name, Object o) {
+        properties.put(name, o);
         return this;
     }
 
@@ -120,7 +90,7 @@ public final class HalRepresentation {
     }
 
     public HalRepresentation addInlineList(String name, Stream<? extends HalRepresentation> representations) {
-        properties.put(name, representations.toArray());
+        properties.put(name, representations.map(r -> r.properties).toArray());
         return this;
     }
 
