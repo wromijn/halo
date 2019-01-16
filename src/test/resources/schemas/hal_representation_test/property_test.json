@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "boolean_true": {
+      "type": "boolean",
+      "const": true
+    },
+    "boolean_false": {
+      "type": "boolean",
+      "const": false
+    },
+    "boolean_null": {
+      "type": "null"
+    },
+    "integer_byte": {
+      "type": "integer",
+      "const": 127
+    },
+    "integer_value": {
+      "type": "integer",
+      "const": 123
+    },
+    "integer_long": {
+      "type": "integer",
+      "const": 123
+    },
+    "integer_float": {
+      "type": "integer",
+      "const": 1
+    },
+    "integer_double": {
+      "type": "integer",
+      "const": 2
+    },
+    "integer_null": {
+      "type": "null"
+    },
+    "number_float": {
+      "type": "number",
+      "const": 123.456
+    },
+    "number_double": {
+      "type": "number",
+      "const": 123.456
+    },
+    "number_integer": {
+      "type": "number",
+      "const": 1.0
+    },
+    "number_null": {
+      "type": "null"
+    },
+    "string_value": {
+      "type": "string",
+      "const": "hello"
+    },
+    "string_null": {
+      "type": "null"
+    }
+  },
+  "required": [
+    "boolean_true",
+    "boolean_false",
+    "boolean_null",
+    "integer_byte",
+    "integer_value",
+    "integer_long",
+    "integer_float",
+    "integer_double",
+    "integer_null",
+    "number_float",
+    "number_double",
+    "number_integer",
+    "number_null",
+    "string_value",
+    "string_null"
+  ],
+  "additionalProperties": false
+}

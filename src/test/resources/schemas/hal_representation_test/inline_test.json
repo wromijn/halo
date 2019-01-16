@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "inline_object": {
+      "$ref": "#/definitions/inline"
+    },
+    "inline_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/inline"
+      }
+    },
+    "inline_stream": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/inline"
+      }
+    }
+  },
+  "required": [
+    "inline_object"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "inline": {
+      "type": "object",
+      "properties": {
+        "inline_property": {
+          "type": "string",
+          "const": "inline_property"
+        }
+      },
+      "required": [
+        "inline_property"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

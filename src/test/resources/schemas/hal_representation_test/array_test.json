@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties":{
+    "boolean_list": {
+      "type": "array",
+      "items": {
+        "type": "boolean",
+        "const": true
+      }
+    },
+    "integer_list": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "const": 1
+      }
+    },
+    "number_list": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "const": 3.0
+      }
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "const": "one"
+      }
+    }
+  },
+  "required": [
+    "boolean_list",
+    "integer_list",
+    "number_list",
+    "string_list"
+  ],
+  "additionalProperties": false
+}
