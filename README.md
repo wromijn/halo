@@ -1,4 +1,4 @@
-# simple-hal
+# Halo
 
 ## What?
 
@@ -14,40 +14,7 @@ Many libraries make it hard or impossible to re-use parts of the output generati
 
 ## Installation
 
-#### Maven
-
-```xml
-<repositories>
-	<repository>
-	    <id>jitpack.io</id>
-	    <url>https://jitpack.io</url>
-	</repository>
-</repositories>
-
-...
-
-<dependency>
-	<groupId>com.github.wromijn</groupId>
-	<artifactId>simple-hal</artifactId>
-	<version>0.0.3-RELEASE</version>
-</dependency>
-```
-
-#### Gradle
-```gradle
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-
-...
-
-dependencies {
-        implementation 'com.github.wromijn:simple-hal:0.0.3-RELEASE'
-}
-```
+Use your favourite build automation tools to install the library from the JitPack registry: https://jitpack.io/#wromijn/halo
 
 ## Usage
 
@@ -78,7 +45,7 @@ Serializes to
 }
 ```
 
-Like JSON-Schema, simple-hal makes a clear distinction between numeric fields that can contain floating point values and numeric fields that can not. To emphasize this distinction, "integer" type fields are output without a fractional part and "number" type fields are always output as floating point values (1 is output as 1.0). This way, an API user can tell even without referring to a schema that a floating point data type is needed.
+Like JSON-Schema, Halo makes a clear distinction between numeric fields that can contain floating point values and numeric fields that can not. To emphasize this distinction, "integer" type fields are output without a fractional part and "number" type fields are always output as floating point values (1 is output as 1.0). This way, an API user can tell even without referring to a schema that a floating point data type is needed.
 
 ## Adding links
 
@@ -169,8 +136,8 @@ HalRepresentation.fromObject(Object o);
 HalRepresentation.fromObject(Object o, ObjectMapper om);
 ```
 
-[![Build Status](https://travis-ci.org/wromijn/simple-hal.svg?branch=master)](https://travis-ci.org/wromijn/simple-hal)
-[![codecov](https://codecov.io/gh/wromijn/simple-hal/branch/master/graph/badge.svg)](https://codecov.io/gh/wromijn/simple-hal)
-[![Maintainability](https://api.codeclimate.com/v1/badges/e384ffe146c10612337e/maintainability)](https://codeclimate.com/github/wromijn/simple-hal/maintainability)
-[![](https://jitpack.io/v/wromijn/simple-hal.svg)](https://jitpack.io/#wromijn/simple-hal)
+[![Build Status](https://travis-ci.org/wromijn/halo.svg?branch=master)](https://travis-ci.org/wromijn/halo)
+[![codecov](https://codecov.io/gh/wromijn/halo/branch/master/graph/badge.svg)](https://codecov.io/gh/wromijn/halo)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e384ffe146c10612337e/maintainability)](https://codeclimate.com/github/wromijn/halo/maintainability)
+[![](https://jitpack.io/v/wromijn/halo.svg)](https://jitpack.io/#wromijn/halo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
