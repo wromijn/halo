@@ -18,10 +18,10 @@ Use your favourite build automation tools to install the library from the JitPac
 
 ## Usage
 
-#### Creating HalRepresentation object
+#### Creating Representation object
 
 ```java
-HalRepresentation representation = new HalRepresentation();
+Representation representation = new Representation();
 ```
 
 Use Jackson to serialize the representation.
@@ -65,10 +65,10 @@ representation.addLinkList("curies", Arrays.asList(new Link("/link1").setName("n
 
 ## Embedding objects
 
-Embedding is always done by embedding another HalRepresentation object. For example:
+Embedding is always done by embedding another Representation object. For example:
 
 ```java
-private HalRepresentation createChildRepresentation(Child c) {
+private Representation createChildRepresentation(Child c) {
 	...
 }
 
@@ -107,7 +107,7 @@ Inlining is like embedding, but the object is added to the properties instead of
 
 #### Example code:
 ```java
-private HalRepresentation createChildRepresentation(Child c) {
+private Representation createChildRepresentation(Child c) {
 	...
 }
 
@@ -128,12 +128,12 @@ addObject(String name, Object o);
 This is a nice option to have if you want to add an Array or schemaless data as a property.
 
 #### Creating a representation from an object
-If you're working with legacy code or just want to add links to an existing model, you can upgrade it to a HalRepresentation.
-This will serialize your object to a Jackson JsonNode and copy the properties to a new HalRepresentation.
+If you're working with legacy code or just want to add links to an existing model, you can upgrade it to a Representation.
+This will serialize your object to a Jackson JsonNode and copy the properties to a new Representation.
 
 ```java
-HalRepresentation.fromObject(Object o);
-HalRepresentation.fromObject(Object o, ObjectMapper om);
+Representation.fromObject(Object o);
+Representation.fromObject(Object o, ObjectMapper om);
 ```
 
 [![Build Status](https://travis-ci.org/wromijn/halo.svg?branch=master)](https://travis-ci.org/wromijn/halo)

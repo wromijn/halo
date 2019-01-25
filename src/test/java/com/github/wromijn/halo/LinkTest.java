@@ -1,4 +1,4 @@
-package com.github.wromijn.simplehal;
+package com.github.wromijn.halo;
 
 import org.junit.jupiter.api.Test;
 

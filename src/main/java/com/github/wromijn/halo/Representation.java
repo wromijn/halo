@@ -1,4 +1,4 @@
-package com.github.wromijn.simplehal;
+package com.github.wromijn.halo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @JsonSerialize(using = HalSerializer.class)
-public final class HalRepresentation {
+public final class Representation {
 
     Map<String, Object> properties = new TreeMap<>();
 
@@ -19,8 +19,8 @@ public final class HalRepresentation {
 
     Map<String, Object> _embedded = new TreeMap<>();
 
-    public static HalRepresentation fromObject(Object object, ObjectMapper objectMapper) {
-        HalRepresentation representation = new HalRepresentation();
+    public static Representation fromObject(Object object, ObjectMapper objectMapper) {
+        Representation representation = new Representation();
         try {
             JsonNode jsonNode = objectMapper.valueToTree(object);
             representation.properties.putAll(objectMapper.treeToValue(jsonNode, Map.class));
@@ -30,33 +30,33 @@ public final class HalRepresentation {
         return representation;
     }
 
-    public static HalRepresentation fromObject(Object o) {
+    public static Representation fromObject(Object o) {
         return fromObject(o, new ObjectMapper());
     }
 
     // --------------------------------------------------------------
 
-    public HalRepresentation addBoolean(String name, Boolean bool) {
+    public Representation addBoolean(String name, Boolean bool) {
         properties.put(name, bool);
         return this;
     }
 
-    public HalRepresentation addInteger(String name, Number number) {
+    public Representation addInteger(String name, Number number) {
         properties.put(name, normalizeInteger(number));
         return this;
     }
 
-    public HalRepresentation addNumber(String name, Number value) {
+    public Representation addNumber(String name, Number value) {
         properties.put(name, normalizeNumber(value));
         return this;
     }
 
-    public HalRepresentation addString(String name, String value) {
+    public Representation addString(String name, String value) {
         properties.put(name, value);
         return this;
     }
 
-    public HalRepresentation addOther(String name, Object o) {
+    public Representation addOther(String name, Object o) {
         properties.put(name, o);
         return this;
     }
@@ -79,56 +79,56 @@ public final class HalRepresentation {
 
     // --------------------------------------------------------------
 
-    public HalRepresentation addInline(String name, HalRepresentation representation) {
+    public Representation addInline(String name, Representation representation) {
         properties.put(name, representation.properties);
         return this;
     }
 
-    public HalRepresentation addInlineList(String name, Iterable<? extends HalRepresentation> representations) {
+    public Representation addInlineList(String name, Iterable<? extends Representation> representations) {
         addInlineList(name, StreamSupport.stream(representations.spliterator(), false));
         return this;
     }
 
-    public HalRepresentation addInlineList(String name, Stream<? extends HalRepresentation> representations) {
+    public Representation addInlineList(String name, Stream<? extends Representation> representations) {
         properties.put(name, representations.map(r -> r.properties).toArray());
         return this;
     }
 
     // --------------------------------------------------------------
 
-    public HalRepresentation addLink(String rel, String uri) {
+    public Representation addLink(String rel, String uri) {
         _links.put(rel, new Link(uri));
         return this;
     }
 
-    public HalRepresentation addLink(String rel, Link link) {
+    public Representation addLink(String rel, Link link) {
         _links.put(rel, link);
         return this;
     }
 
-    public HalRepresentation addLinkList(String rel, Iterable<? extends Link> links) {
+    public Representation addLinkList(String rel, Iterable<? extends Link> links) {
         addLinkList(rel, StreamSupport.stream(links.spliterator(), false));
         return this;
     }
 
-    public HalRepresentation addLinkList(String rel, Stream<? extends Link> links) {
+    public Representation addLinkList(String rel, Stream<? extends Link> links) {
         _links.put(rel, links.toArray());
         return this;
     }
 
     // --------------------------------------------------------------
 
-    public HalRepresentation addEmbedded(String rel, HalRepresentation representation) {
+    public Representation addEmbedded(String rel, Representation representation) {
         _embedded.put(rel, representation);
         return this;
     }
 
-    public HalRepresentation addEmbeddedList(String rel, Iterable<? extends HalRepresentation> representations) {
+    public Representation addEmbeddedList(String rel, Iterable<? extends Representation> representations) {
         addEmbeddedList(rel, StreamSupport.stream(representations.spliterator(), false));
         return this;
     }
 
-    public HalRepresentation addEmbeddedList(String rel, Stream<? extends HalRepresentation> representations) {
+    public Representation addEmbeddedList(String rel, Stream<? extends Representation> representations) {
         _embedded.put(rel, representations.toArray());
         return this;
     }

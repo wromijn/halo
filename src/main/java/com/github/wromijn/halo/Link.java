@@ -1,4 +1,4 @@
-package com.github.wromijn.simplehal;
+package com.github.wromijn.halo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

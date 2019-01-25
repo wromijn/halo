@@ -1,4 +1,4 @@
-package com.github.wromijn.simplehal;
+package com.github.wromijn.halo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,13 +12,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class HalRepresentationTest {
+public class RepresentationTest {
 
     private SchemaUtils schemaUtils = new SchemaUtils();
 
     @Test
     public void testProperties() {
-        HalRepresentation representation = new HalRepresentation()
+        Representation representation = new Representation()
                 .addBoolean("boolean_true", true)
                 .addBoolean("boolean_false", false)
                 .addBoolean("boolean_null", null)
@@ -39,7 +39,7 @@ public class HalRepresentationTest {
 
     @Test
     public void testLists() {
-        HalRepresentation representation = new HalRepresentation()
+        Representation representation = new Representation()
                 .addOther("boolean_list", Collections.singletonList(true))
                 .addOther("integer_list", Collections.singletonList(1))
                 .addOther("number_list", Collections.singletonList(3F))
@@ -49,7 +49,7 @@ public class HalRepresentationTest {
 
     @Test
     public void testLinks() {
-        HalRepresentation representation = new HalRepresentation()
+        Representation representation = new Representation()
                 .addLink("simple_link", "http://www.example.com/single")
                 .addLink("link_object", new Link("http://www.example.com/object"))
                 .addLinkList("link_list", Collections.singleton(new Link("http://www.example.com/list")))
@@ -59,7 +59,7 @@ public class HalRepresentationTest {
 
     @Test
     public void testInline() {
-        HalRepresentation representation = new HalRepresentation()
+        Representation representation = new Representation()
                 .addInline("inline_object", createObjectRepresentation())
                 .addInlineList("inline_list", Collections.singletonList(createObjectRepresentation()))
                 .addInlineList("inline_stream", Stream.of(createObjectRepresentation()));
@@ -68,7 +68,7 @@ public class HalRepresentationTest {
 
     @Test
     public void testEmbedded() {
-        HalRepresentation representation = new HalRepresentation()
+        Representation representation = new Representation()
                 .addEmbedded("embedded_object", createObjectRepresentation())
                 .addEmbeddedList("embedded_stream", Stream.of(createObjectRepresentation()))
                 .addEmbeddedList("embedded_list", Collections.singleton(createObjectRepresentation()));
@@ -81,7 +81,7 @@ public class HalRepresentationTest {
         node.put("name", "value");
         node.put("number", 1);
         node.put("boolean", false);
-        HalRepresentation representation = HalRepresentation.fromObject(node);
+        Representation representation = Representation.fromObject(node);
         assertThat(representation.properties.get("name"), is("value"));
         assertThat(representation.properties.get("number"), is(1));
         assertThat(representation.properties.get("boolean"), is(false));
@@ -90,13 +90,13 @@ public class HalRepresentationTest {
     @Test
     public void testFromObjectWithError() {
         JsonNode node = new ObjectMapper().createArrayNode();
-        assertThrows(IllegalArgumentException.class, () -> HalRepresentation.fromObject(node));
+        assertThrows(IllegalArgumentException.class, () -> Representation.fromObject(node));
     }
 
-    private HalRepresentation createObjectRepresentation() {
-        return new HalRepresentation()
+    private Representation createObjectRepresentation() {
+        return new Representation()
                 .addString("inline_property", "inline_property")
                 .addLink("self", "http://www.example.com")
-                .addEmbedded("embedded", new HalRepresentation().addString("key", "value"));
+                .addEmbedded("embedded", new Representation().addString("key", "value"));
     }
 }
