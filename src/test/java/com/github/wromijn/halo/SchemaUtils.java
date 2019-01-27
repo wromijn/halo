@@ -20,6 +20,7 @@ public class SchemaUtils {
     @SneakyThrows
     public void assertSerializationMatchesSchema(Object o, String schemaPath) {
         String response = objectMapper.writeValueAsString(o);
+        System.out.println(response);
         try (InputStream inputStream = getClass().getResourceAsStream(schemaPath)) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
             Schema schema = SchemaLoader.load(rawSchema);

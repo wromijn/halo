@@ -118,6 +118,28 @@ representation.addInline("child", createChildRepresentation(child))
 representation.addInlineList("children", children.stream().map(this::createChildRepresentation))
 ```
 
+## Adding curies
+
+Simply use the `addCurie(String curie, String href)` method:
+```java
+representation.addCurie("hal", "http://www.example.com/docs/{rel}");
+```
+
+This will produce the following json:
+```json
+{
+    "_links": {
+        "curies": [
+            {
+                "href": "http://www.example.com/docs/{rel}",
+                "templated": true,
+                "name": "hal"
+            }
+        ]    
+    }
+}
+```
+
 ## Extras
 
 #### Adding whole objects as a property

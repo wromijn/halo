@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -113,6 +113,16 @@ public final class Representation {
 
     public Representation addLinkList(String rel, Stream<? extends Link> links) {
         _links.put(rel, links.toArray());
+        return this;
+    }
+
+    // --------------------------------------------------------------
+
+    public Representation addCurie(String curie, String href) {
+        Object curiesObject = _links.get("curies");
+        List<Link> curies = curiesObject instanceof  Link[] ? new ArrayList<>(Arrays.asList((Link[]) curiesObject)) : new ArrayList<>();
+        curies.add(new Link(href).setName(curie));
+        _links.put("curies", curies.toArray(new Link[0]));
         return this;
     }
 
