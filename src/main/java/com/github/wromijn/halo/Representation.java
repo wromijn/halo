@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -119,10 +118,16 @@ public final class Representation {
     // --------------------------------------------------------------
 
     public Representation addCurie(String curie, String href) {
+        Link[] curies;
         Object curiesObject = _links.get("curies");
-        List<Link> curies = curiesObject instanceof  Link[] ? new ArrayList<>(Arrays.asList((Link[]) curiesObject)) : new ArrayList<>();
-        curies.add(new Link(href).setName(curie));
-        _links.put("curies", curies.toArray(new Link[0]));
+        if (curiesObject instanceof Link[]) {
+            curies = (Link[]) curiesObject;
+            curies = Arrays.copyOf(curies, curies.length + 1);
+        } else {
+            curies = new Link[1];
+        }
+        curies[curies.length-1] = new Link(href).setName(curie);
+        _links.put("curies", curies);
         return this;
     }
 
