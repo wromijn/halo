@@ -14,7 +14,7 @@ Many libraries make it hard or impossible to re-use parts of the output generati
 
 ## Installation
 
-Use your favourite build automation tools to install the library from the JitPack registry: https://jitpack.io/#wromijn/halo
+Use your favourite build automation tool to install the library from the JitPack registry: https://jitpack.io/#wromijn/halo
 
 ## Usage
 
@@ -140,6 +140,11 @@ This will produce the following json:
 }
 ```
 
+Duplicate curies (curies in embedded representations that already exist in the parent
+representation) will be removed from the output when the object is serialized. This way, you can add the curies that
+your application uses to a base representation without sprinkling curie definitions all
+over the place.
+
 ## Extras
 
 #### Adding whole objects as a property
@@ -150,8 +155,8 @@ addObject(String name, Object o);
 This is a nice option to have if you want to add an Array or schemaless data as a property.
 
 #### Creating a representation from an object
-If you're working with legacy code or just want to add links to an existing model, you can upgrade it to a Representation.
-This will serialize your object to a Jackson JsonNode and copy the properties to a new Representation.
+If you're working with legacy code or just want to add links to an existing model, you can upgrade it to a Representation object.
+This will serialize your object to a Jackson JsonNode and create a new Representation from its properties.
 
 ```java
 Representation.fromObject(Object o);
