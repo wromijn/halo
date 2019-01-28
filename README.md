@@ -150,7 +150,7 @@ over the place.
 #### Adding whole objects as a property
 Provided that the object is serializable with Jackson, you can add a whole object as a property:
 ```java
-addObject(String name, Object o);
+addOther(String name, Object o);
 ```
 This is a nice option to have if you want to add an Array or schemaless data as a property.
 
