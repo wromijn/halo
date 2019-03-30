@@ -45,7 +45,7 @@ Serializes to
 }
 ```
 
-Like JSON-Schema, Halo makes a clear distinction between numeric fields that can contain floating point values and numeric fields that can not. To emphasize this distinction, "integer" type fields are output without a fractional part and "number" type fields are always output as floating point values (1 is output as 1.0). This way, an API user can tell even without referring to a schema that a floating point data type is needed.
+Like JSON-Schema, Halo makes a clear distinction between numeric fields that can contain floating point values and numeric fields that can not. To emphasize this distinction, "integer" type fields are serialized without a fractional part and "number" type fields are always serialized as floating point values (1 is output as 1.0). This way, an API user can tell even without referring to a schema that a floating point data type is needed to contain the value.
 
 ## Adding links
 
