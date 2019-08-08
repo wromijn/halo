@@ -5,6 +5,24 @@
     "_links": {
       "type": "object",
       "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "const": "http://www.example.com/self"
+            },
+            "title": {
+              "type": "string",
+              "const": "URI of this resource"
+            }
+          },
+          "required": [
+            "href",
+            "title"
+          ],
+          "additionalProperties": false
+        },
         "simple_link": {
           "type": "object",
           "properties": {
@@ -69,6 +87,7 @@
         }
       },
       "required": [
+        "self",
         "simple_link",
         "link_object",
         "link_list",

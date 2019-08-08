@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.wromijn.halo.postprocessors.PostProcessor;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -11,6 +12,8 @@ import java.util.stream.StreamSupport;
 
 @JsonSerialize(using = HalSerializer.class)
 public final class Representation {
+// TODO: can we move this to some global settings thingie? You don't want to set an instance of a postprocessor for every (sub)representation
+    List<PostProcessor> postProcessors = new ArrayList<>();
 
     Map<String, Object> properties = new TreeMap<>();
 
@@ -126,7 +129,7 @@ public final class Representation {
         } else {
             curies = new Link[1];
         }
-        curies[curies.length-1] = new Link(href).setName(curie);
+        curies[curies.length - 1] = new Link(href).setName(curie);
         _links.put("curies", curies);
         return this;
     }
@@ -145,6 +148,13 @@ public final class Representation {
 
     public Representation addEmbeddedList(String rel, Stream<? extends Representation> representations) {
         _embedded.put(rel, representations.toArray());
+        return this;
+    }
+
+    // --------------------------------------------------------------
+
+    public Representation addPostProcessor(PostProcessor postProcessor) {
+        this.postProcessors.add(postProcessor);
         return this;
     }
 }

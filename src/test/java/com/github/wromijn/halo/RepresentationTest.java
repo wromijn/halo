@@ -3,6 +3,7 @@ package com.github.wromijn.halo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.wromijn.halo.postprocessors.PostProcessors;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -50,6 +51,8 @@ public class RepresentationTest {
     @Test
     public void testLinks() {
         Representation representation = new Representation()
+                .addPostProcessor(PostProcessors::addDefaultTitles)
+                .addLink("self", "http://www.example.com/self")
                 .addLink("simple_link", "http://www.example.com/single")
                 .addLink("link_object", new Link("http://www.example.com/object"))
                 .addLinkList("link_list", Collections.singleton(new Link("http://www.example.com/list")))
