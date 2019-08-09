@@ -118,6 +118,9 @@ representation.addInline("child", createChildRepresentation(child))
 representation.addInlineList("children", children.stream().map(this::createChildRepresentation))
 ```
 
+## Merging Representations
+If you want to copy all properties, links and embedded objects of another representation into the current one, you can use `representation.include(another_representation)`. This allows for easy composition of Representations out of several components.
+
 ## Adding curies
 
 Simply use the `addCurie(String curie, String href)` method:
