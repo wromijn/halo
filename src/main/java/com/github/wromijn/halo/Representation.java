@@ -78,6 +78,14 @@ public final class Representation {
 
     // --------------------------------------------------------------
 
+    public Representation include(Representation representation) {
+        this.properties.putAll(representation.properties);
+        this._links.putAll(representation._links);
+        this._embedded.putAll(representation._embedded);
+    }
+    
+    // --------------------------------------------------------------
+
     public Representation addInline(String name, Representation representation) {
         properties.put(name, representation.properties);
         return this;
