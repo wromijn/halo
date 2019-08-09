@@ -18,7 +18,7 @@ Use your favourite build automation tool to install the library from the JitPack
 
 ## Usage
 
-#### Creating Representation object
+#### Creating a Representation object
 
 ```java
 Representation representation = new Representation();
