@@ -82,6 +82,7 @@ public final class Representation {
         this.properties.putAll(representation.properties);
         this._links.putAll(representation._links);
         this._embedded.putAll(representation._embedded);
+        return this;
     }
     
     // --------------------------------------------------------------
